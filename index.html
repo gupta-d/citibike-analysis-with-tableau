@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+	  <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  <title>NYC citiBike trends 2014-18</title>
+	  <!-- Bootstrap CSS -->
+	  
+	  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	  
+	  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 	
+	  <link rel="stylesheet" href="static/style.css">
+
+	</head>
+
+	<div id = "navigation" class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <a class="navbar-brand" href="index.html"><b>citibike</b></a>
+		  <img class="nav-ufo" src="images/Citibike_Logo_p.svg">
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		  	<span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+		    <ul class="navbar-nav ml-auto">
+<!-- 		      <li class="nav-item active">
+		        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+		      </li> -->
+<!-- 		      <li class="nav-item">
+		        <a class="nav-link" href="data.html">Data</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="comparison.html">Comparison</a>
+		      </li> -->
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">tableau charts</a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="#ridership">Ridership</a>
+		          <a class="dropdown-item" href="#subscriptions">Subscriptions</a>
+		          <a class="dropdown-item" href="#peakHours">Peak Hours during summer and winter</a>
+		          <a class="dropdown-item" href="#top-bottom-10">Top & bottom-10 stations</a>
+		          <a class="dropdown-item" href="#gender">Gender dimension</a>
+		          <a class="dropdown-item" href="#age">Age vs trip duration</a>
+		          <a class="dropdown-item" href="#trip-distance">Average trip distance</a>
+		          <a class="dropdown-item" href="#bike">Bike utilization</a>
+		          <a class="dropdown-item" href="#geomap">Bike stations on geo-map</a>
+		          <a class="dropdown-item" href="#motionChart">Motion-chart of 5 most popular stations</a>
+	
+		        </div>
+		      </li>
+		    </ul>
+		  </div>
+		</nav
+	</div>
+
+
+
+    <header id = 'page1'>
+    	<h2></h2>
+  	</header>
+
+  			<body>
+
+  				 <div class="col-md-12 hero text-top">
+				      <h1></h1>
+				      <h2>have a wonderful ride..</h2>
+				 </div>
+
+  				<div class="container">
+			    <!--Normally these medium columns go full wide on small screen sizes-->
+			    	<div class="row">
+			    		
+			      		<div class="col-md-9 jumbotron intro">
+			      				<h3> <u>Introducing citibike</u></h3>
+
+  								<p>Citi Bike is the nation's largest bike share program, with 12,000 bikes and 750 stations across Manhattan, Brooklyn, Queens and Jersey City. It started in 2013 and has seen phenomenal growth ever since.
+  								<a href="https://www.citibikenyc.com">Link to citibikenyc home page. </a></p> 
+								
+
+								<p>Citi Bike provides all the historical data for this service.In addition citibike website also publishes monthly report and dashboards.<a href= "https://www.citibikenyc.com/system-data">Link to citibike data download page. </a></p>
+
+								<p>The objective of this post is to analyze the citibike data during 2014-2018 period and answer a few questions as below. </p>
+
+								<p>
+									<ol>
+
+											<li>What is the absolute and percentage <b>ridership growth</b> during 2014-18?.</li>
+
+											<li>Is <b>annual subscriptions share</b> on the rise vs short term users (with 24 hours or 3-day passes)?</li>
+
+											<li>What are the <b>peak hours of usages</b> during <b>summer months</b> (May, Jun, July) and <b>winter months</b> (Dec, Jan, Feb)?</li>
+
+											<li>Which are the <b>top-10 and bottom-10 stations</b> by number of originating and terminating trips?</li>
+
+											<li>What are the <b>usage statistics by gender</b>? Do we see any impact of gender outreach programs?</li> 
+
+											<li>What is the <b>average trip duration</b> as a function of rider’s age?</li>
+
+											<li>What is the <b>average trip distance</b> ?</li>
+
+											<li>Which bikes are most <b>likely due for repair/inspection</b> during the timespan?</li>
+
+											<li>How variable is the <b>bike utilization</b>?</li>
+
+											<li>Can we see <b>all bike stations on a geo-map</b> with their historical data? </li>
+
+											<li>How the <b>popularity of top-5 stations’ changes over the time span</b>?</li>
+									</ol>
+								</p>
+
+								<p><b>All the interactive charts on this page are created using tableau public and embedded here with tableau viz’es.</b></p>
+
+								<p><b>ETL code and tableau workbooks are available in my github repository:</b> 
+								<a href="https://github.com/gupta-d/citibike_analysis_with_tableau">link to code and tableau workbook. </a></p>
+
+						</div>
+
+					  	
+			      		
+
+			      		
+			      		<div class="col-md-3 jumbotron quickLinks">
+<!-- 			      			<div class="container quickLinks"> -->
+
+<!-- 		    			  		<div class="container">
+		    						<div class="row">
+		    							<div class="col-sm-12 col-md-12"> -->
+		    								<p>
+			      							<h3><u>Quick Links</u></h3>
+			      							</p>
+			      							<p>
+												<ul>
+													  <li><a id = "white" href="#ridership">Ridership</a></li>
+											          <li><a id = "white" href="#subscriptions">Subscriptions</a></li>
+											          <li><a id = "white" href="#peakHours">Peak Hours during summer and winter</a></li>
+											          <li><a id = "white" href="#top-bottom-10">Top & bottom-10 stations</a></li>
+											          <li><a id = "white" href="#gender">Gender dimension</a></li>
+											          <li><a id = "white" href="#age">Age vs trip duration</a></li>
+											          <li><a id = "white" href="#trip-distance">Average trip distance</a></li>
+											          <li><a id = "white" href="#bike">Bike utilization</a></li>
+											          <li><a id = "white" href="#geomap">Bike stations on geo-map</a></li>
+											          <li><a id = "white" href="#motionChart">Motion-chart of 5 most popular stations</a></li>
+
+
+
+												</ul>
+
+						</div>
+
+					</div>
+				</div>
+
+
+
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id ="ridership" class="col-md-10 jumbotron chart1">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+
+			        		
+
+									<div class='tableauPlaceholder' id='viz1563763908393' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-ridership&#47;CitiBikeRidershipGrowth&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-ridership&#47;CitiBikeRidershipGrowth' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-ridership&#47;CitiBikeRidershipGrowth&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563763908393');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+
+							</div>
+						</div>
+
+
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "subscriptions" class="col-md-10 jumbotron chart2">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+
+			        		
+
+									<div class='tableauPlaceholder' id='viz1563812727173' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-annualsubscribers&#47;AnnualSubscribers&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-annualsubscribers&#47;AnnualSubscribers' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-annualsubscribers&#47;AnnualSubscribers&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563812727173');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+
+							</div>
+						</div>
+
+
+<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "peakHours" class="col-md-10 jumbotron chart3">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+
+			        		<div class='tableauPlaceholder' id='viz1563783040962' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-summer&#47;SummerMonths&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-summer&#47;SummerMonths' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-summer&#47;SummerMonths&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563783040962');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+			        		<div class='tableauPlaceholder' id='viz1563787029738' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-winter&#47;WinterMonths&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-winter&#47;WinterMonths' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-winter&#47;WinterMonths&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563787029738');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+									
+
+
+							</div>
+						</div>
+
+
+
+
+							<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "top-bottom-10" class="col-md-10 jumbotron chart5">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+
+			        				<div class='tableauPlaceholder' id='viz1563783839895' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-start_top10&#47;Top-10Stations&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-start_top10&#47;Top-10Stations' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-start_top10&#47;Top-10Stations&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563783839895');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+
+			        				<div class='tableauPlaceholder' id='viz1563783901136' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-start_bottom10&#47;Bottom-10Stations&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-start_bottom10&#47;Bottom-10Stations' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-start_bottom10&#47;Bottom-10Stations&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563783901136');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+									
+
+
+							</div>
+						</div>
+
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "gender" class="col-md-10 jumbotron chart6">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+									<div class='tableauPlaceholder' id='viz1563812588851' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-gender&#47;TheGenderDimension&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-gender&#47;TheGenderDimension' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-gender&#47;TheGenderDimension&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563812588851');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+			        		
+
+									
+
+
+							</div>
+						</div>
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "age" class="col-md-10 jumbotron chart7">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+									<div class='tableauPlaceholder' id='viz1563784525386' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-age&#47;TheAgeFactor&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-age&#47;TheAgeFactor' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-age&#47;TheAgeFactor&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563784525386');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+			        		
+
+									
+
+
+							</div>
+						</div>
+
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "trip-distance" class="col-md-10 jumbotron chart8">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+									<div class='tableauPlaceholder' id='viz1563784715692' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Av&#47;Avgtripdistance&#47;AverageTripDistance-allstations&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Avgtripdistance&#47;AverageTripDistance-allstations' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Av&#47;Avgtripdistance&#47;AverageTripDistance-allstations&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563784715692');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+			        		
+
+									
+
+
+							</div>
+						</div>
+
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "bike" class="col-md-10 jumbotron chart9">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+
+									<div class='tableauPlaceholder' id='viz1563785028462' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-bikeTrips&#47;BikeTrips&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-bikeTrips&#47;BikeTrips' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-bikeTrips&#47;BikeTrips&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563785028462');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+
+
+
+								<div class='tableauPlaceholder' id='viz1563785920698' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;Top10stations-avgtripdistance&#47;Top10startingstationsbyaveragetripdistance&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Top10stations-avgtripdistance&#47;Top10startingstationsbyaveragetripdistance' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;To&#47;Top10stations-avgtripdistance&#47;Top10startingstationsbyaveragetripdistance&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563785920698');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+
+
+			        		
+
+									
+
+
+							</div>
+						</div>
+
+
+							<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "geomap" class="col-md-10 jumbotron chart10">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+									<div class='tableauPlaceholder' id='viz1563786603616' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-start_geomap&#47;GeoMappingStations&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike-start_geomap&#47;GeoMappingStations' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike-start_geomap&#47;GeoMappingStations&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563786603616');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+			        		
+
+									
+
+
+							</div>
+						</div>
+
+
+						<div class="container">
+			    				<!--Normally these medium columns go full wide on small screen sizes-->
+			    			<div class="row">
+			    		
+			      					<div id = "motionChart" class="col-md-10 jumbotron chart11">
+			      						<a id = "white" href="#navigation" ><h4><b>Return to Top</b></h4></a>
+
+
+<!-- 				      				<header>
+								  	<h2><b>1.	Ridership growth by absolute numbers/percentage</b></h2>
+									</header> -->
+								<div class='tableauPlaceholder' id='viz1563786919451' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike_top-5stationsmotionchart&#47;Top-5popularstations&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='citi-bike_top-5stationsmotionchart&#47;Top-5popularstations' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;ci&#47;citi-bike_top-5stationsmotionchart&#47;Top-5popularstations&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1563786919451');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+			        		
+
+									
+
+
+							</div>
+						</div>
+
+								<p><b>ETL code and tableau workbooks are available in my github repository:</b> 
+									<a href="https://github.com/gupta-d/citibike_analysis_with_tableau">link to code and tableau workbook. </a></p>
+
+	    	</body>
+
+
+  
+</html>
