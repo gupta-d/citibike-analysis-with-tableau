@@ -7,7 +7,7 @@ Citi Bike provides all the historical data for this service.In addition citibike
 
 We intend to use tableau to analyze the citibike data during 2014-2018 period to answer a few questions as below:
 
-1. What is the absolute and percentage <b>ridership growth</b> during 2014-18?.
+1. What is the absolute and percentage <b>ridership growth</b> during 2014-18?
 
 2. Is annual subscriptions share on the rise vs short term users (with 24 hours or 3-day passes)?
 
